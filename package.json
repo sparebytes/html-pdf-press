@@ -1,6 +1,6 @@
 {
   "name": "@html-pdf-press/monorepo",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "repository": {
     "type": "git",
     "url": "https://github.com/sparebytes/html-pdf-press.git"
@@ -21,6 +21,7 @@
     "standard-version": "standard-version"
   },
   "devDependencies": {
+    "lerna": "^3.16.4",
     "prettier": "~1.18.2"
   }
 }
