@@ -2,14 +2,14 @@
   "name": "@html-pdf-press/server",
   "version": "0.1.0",
   "description": "",
-  "author": "",
+  "author": "Franklin Davenport",
   "license": "MIT",
   "scripts": {
     "build": "rimraf dist && tsc -p tsconfig.build.json",
     "start": "ts-node -r tsconfig-paths/register src/main.ts",
-    "start:dev": "tsc-watch -p tsconfig.build.json --onSuccess \"node dist/main.js\"",
-    "start:debug": "tsc-watch -p tsconfig.build.json --onSuccess \"node --inspect=127.0.0.1:7354 dist/main.js\"",
-    "start:break": "tsc-watch -p tsconfig.build.json --onSuccess \"node --inspect=127.0.0.1:7354 --inspect-brk dist/main.js\"",
+    "start:dev": "tsc-watch --compiler ttypescript/bin/tsc -p tsconfig.build.json --onSuccess \"node dist/main.js\"",
+    "start:debug": "tsc-watch --compiler ttypescript/bin/tsc -p tsconfig.build.json --onSuccess \"node --inspect=127.0.0.1:7354 dist/main.js\"",
+    "start:break": "tsc-watch --compiler ttypescript/bin/tsc -p tsconfig.build.json --onSuccess \"node --inspect=127.0.0.1:7354 --inspect-brk dist/main.js\"",
     "start:prod": "node dist/main.js",
     "lint": "tslint -p tsconfig.json -c tslint.json",
     "test": "jest",
@@ -43,7 +43,9 @@
     "tsc-watch": "~3.0.0",
     "tsconfig-paths": "~3.8.0",
     "tslint": "~5.19.0",
-    "typescript": "^3.6.2"
+    "typescript": "^3.6.2",
+    "ttypescript": "~1.5.7",
+    "typesmith": "~0.9.7"
   },
   "jest": {
     "moduleFileExtensions": [

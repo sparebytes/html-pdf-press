@@ -13,6 +13,16 @@ export const appConfig = {
     noSandbox: configGetBoolean("chrome.noSandbox"),
     disableGpu: configGetBoolean("chrome.disableGpu"),
   },
+  defaults: {
+    header: {
+      html: configGetString("defaults.header.html", null),
+      selector: configGetString("defaults.header.selector", null),
+    },
+    footer: {
+      html: configGetString("defaults.footer.html", null),
+      selector: configGetString("defaults.footer.selector", null),
+    },
+  },
 };
 
 function configGetString<T>(key: string): string;

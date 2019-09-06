@@ -30,14 +30,14 @@ export class AppService {
       options.executablePath = chrome.bin;
     }
 
-    const browser = await puppeteer.launch();
+    const browser = await puppeteer.launch(options);
 
     // browser.on("error", msg => {
     //   console.log("BROWSER ERROR", msg);
     //   throw msg;
     // });
 
-    console.log("Launched Chrome Browser version ", browser.version());
+    console.log("Launched Chrome Browser version ", await browser.version());
     return browser;
   }
 

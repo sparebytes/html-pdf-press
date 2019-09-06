@@ -10,7 +10,8 @@
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true,
-    "strict": true
+    "strict": true,
+    "plugins": [{ "transform": "typesmith/transformer" }]
   },
   "exclude": ["node_modules", "dist"]
 }

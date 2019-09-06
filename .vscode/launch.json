@@ -16,6 +16,9 @@
             "env": {
                 "NODE_ENV": "develop"
             },
+            "skipFiles": [
+                "<node_internals>/**/*.js"
+            ],
         },
         {
             "type": "node",
@@ -24,8 +27,12 @@
             "restart": true,
             "name": "Server (Attach)",
             "sourceMaps": true,
+            "outFiles": [""],
             "cwd": "${workspaceRoot}/server",
-            "protocol": "inspector"
+            "protocol": "inspector",
+            "skipFiles": [
+                "<node_internals>/**/*.js"
+            ],
         }
     ]
 }

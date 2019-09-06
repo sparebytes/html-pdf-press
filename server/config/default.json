@@ -7,10 +7,16 @@
         "useIncognito": true,
         "closePages": true,
         "concurrentPages": 8,
-        "headless": false,
+        "headless": true,
         "noSandbox": false,
         "disableGpu": true
     },
-    "printHeaderSelector": "hpp-print-header",
-    "printFooterSelector": "hpp-print-footer"
+    "defaults": {
+        "header": {
+            "selector": "hpp-print-header"
+        },
+        "footer": {
+            "footerSelector": "hpp-print-footer"
+        }
+    }
 }

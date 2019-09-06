@@ -16,7 +16,8 @@
     "object-literal-key-quotes": false,
     "max-classes-per-file": false,
     "array-type": false,
-    "semicolon": true
+    "semicolon": true,
+    "no-floating-promises": true
   },
   "rulesDirectory": []
 }

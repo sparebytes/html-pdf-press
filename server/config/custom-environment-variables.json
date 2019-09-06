@@ -10,5 +10,15 @@
         "headless": "HPP_CHROME_HEADLESS",
         "noSandbox": "HPP_CHROME_NO_SANDBOX",
         "disableGpu": "HPP_CHROME_DISABLE_GPU"
+    },
+    "default": {
+        "header": {
+            "headerHtml": "HPP_DEFAULT_HEADER_HTML",
+            "selector": "HPP_DEFAULT_HEADER_SELECTOR"
+        },
+        "footer": {
+            "footerHtml": "HPP_DEFAULT_FOOTER_HTML",
+            "footerSelector": "HPP_DEFAULT_FOOTER_SELECTOR"
+        }
     }
 }
