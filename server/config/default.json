@@ -10,5 +10,7 @@
         "headless": false,
         "noSandbox": false,
         "disableGpu": true
-    }
+    },
+    "printHeaderSelector": "hpp-print-header",
+    "printFooterSelector": "hpp-print-footer"
 }
