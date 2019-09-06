@@ -29,5 +29,5 @@ git clone https://github.com/sparebytes/html-pdf-press.git
 cd html-pdf-press
 yarn install
 yarn run dev
-# Goto http://localhost:7355
+# Goto http://localhost:7355?url=https://google.com
 ```

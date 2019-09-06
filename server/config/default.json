@@ -1,0 +1,14 @@
+{
+    "port": 7355,
+    "chrome": {
+        "bin": "/usr/bin/google-chrome",
+        "binWindows": "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
+        "useChromium": true,
+        "useIncognito": true,
+        "closePages": true,
+        "concurrentPages": 8,
+        "headless": false,
+        "noSandbox": false,
+        "disableGpu": true
+    }
+}
