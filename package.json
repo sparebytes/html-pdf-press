@@ -1,7 +1,10 @@
 {
   "name": "@html-pdf-press/monorepo",
   "version": "0.1.0",
-  "repository": "github.com/sparebytes/html-pdf-press",
+  "repository": {
+      "type": "git",
+      "url": "https://github.com/sparebytes/html-pdf-press.git"
+  },
   "author": "Franklin Davenport <sparebytes@gmail.com>",
   "license": "MIT",
   "private": true,
@@ -9,6 +12,8 @@
     "server"
   ],
   "scripts": {
+    "dev": "yarn run server start:dev",
+    "debug": "yarn run server start:debug",
     "server": "cd server && yarn",
     "prettier": "prettier --write \"server/src/**/*.ts\""
   },

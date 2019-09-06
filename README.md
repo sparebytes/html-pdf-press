@@ -18,6 +18,16 @@
   - [ ] Automatically applies margin to header/footer
   - [ ] Different header for first page
 - [ ] Configurable
-  - [ ] Page size and margin presets 
+  - [ ] Page size and margin presets
   - [ ] Load a url or supply HTML directly
   - [ ] Use Chrome or Chromium
+
+## 💿 Quick Start Guide
+
+```bash
+git clone https://github.com/sparebytes/html-pdf-press.git
+cd html-pdf-press
+yarn install
+yarn run dev
+# Goto http://localhost:7355
+```
