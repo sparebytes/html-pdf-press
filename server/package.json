@@ -4,9 +4,16 @@
   "description": "",
   "author": "Franklin Davenport",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sparebytes/html-pdf-press.git"
+  },
+  "bin": {
+    "htmlpdfpress": "./cli.js"
+  },
   "scripts": {
-    "build": "rimraf dist && tsc -p tsconfig.build.json",
-    "start": "ts-node -r tsconfig-paths/register src/main.ts",
+    "build": "rimraf dist && ttsc -p tsconfig.build.json && cpx ../README.md dist && package-json-reducer -s \"scripts devDependencies jest\" -o dist/package.json package.json && cpx {config/default.json,config/custom-environment-variables.json} dist",
+    "start": "ts-node --compiler ttypescript -r tsconfig-paths/register src/main.ts",
     "start:dev": "tsc-watch --compiler ttypescript/bin/tsc -p tsconfig.build.json --onSuccess \"node dist/main.js\"",
     "start:debug": "tsc-watch --compiler ttypescript/bin/tsc -p tsconfig.build.json --onSuccess \"node --inspect=127.0.0.1:7354 dist/main.js\"",
     "start:break": "tsc-watch --compiler ttypescript/bin/tsc -p tsconfig.build.json --onSuccess \"node --inspect=127.0.0.1:7354 --inspect-brk dist/main.js\"",
@@ -38,6 +45,8 @@
     "@types/supertest": "~2.0.7",
     "cpx": "~1.5.0",
     "jest": "~24.7.1",
+    "package-json-reducer": "~1.0.18",
+    "standard-version": "^6.0.1",
     "supertest": "~4.0.2",
     "ts-jest": "~24.0.2",
     "ts-node": "~8.3.0",
