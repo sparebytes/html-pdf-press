@@ -10,6 +10,12 @@ export class AppService {
   private browserPromise?: Promise<Browser>;
   private printServicePromise?: Promise<PrintService>;
 
+  constructor() {
+    if (!appConfig.chrome.initialilzeOnFirstRequest) {
+      void this.getPrintService();
+    }
+  }
+
   async launchBrowser() {
     const args: string[] = [];
     const { chrome } = appConfig;

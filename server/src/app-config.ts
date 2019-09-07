@@ -12,6 +12,7 @@ export const appConfig = {
     headless: configGetBoolean("chrome.headless"),
     noSandbox: configGetBoolean("chrome.noSandbox"),
     disableGpu: configGetBoolean("chrome.disableGpu"),
+    initialilzeOnFirstRequest: configGetBoolean("chrome.initialilzeOnFirstRequest", false),
   },
   defaults: {
     header: {
