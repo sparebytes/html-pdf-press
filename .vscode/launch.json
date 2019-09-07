@@ -14,7 +14,8 @@
             "cwd": "${workspaceRoot}/server",
             "protocol": "inspector",
             "env": {
-                "NODE_ENV": "develop"
+                "NODE_ENV": "develop",
+                "TS_NODE_COMPILER": "ttypescript"
             },
             "skipFiles": [
                 "<node_internals>/**/*.js"
