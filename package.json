@@ -9,6 +9,7 @@
   "license": "MIT",
   "private": true,
   "workspaces": [
+    ".",
     "puppeteer-util",
     "server",
     "types"
@@ -19,7 +20,7 @@
     "debug": "yarn run server start:debug",
     "server": "cd server && yarn",
     "prettier": "prettier --write \"server/src/**/*.ts\"",
-    "standard-version": "standard-version"
+    "standard-version": "lerna version --conventional-commits"
   },
   "devDependencies": {
     "lerna": "^3.16.4",
