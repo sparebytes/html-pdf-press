@@ -1,6 +1,6 @@
 {
   "name": "@html-pdf-press/server",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "description": "",
   "author": "Franklin Davenport",
   "license": "MIT",
@@ -26,8 +26,8 @@
     "test:e2e": "jest --config ./test/jest-e2e.json"
   },
   "dependencies": {
-    "@html-pdf-press/puppeteer-util": "0.2.0",
-    "@html-pdf-press/types": "0.2.0",
+    "@html-pdf-press/puppeteer-util": "^0.3.0",
+    "@html-pdf-press/types": "^0.3.0",
     "@nestjs/common": "~6.6.7",
     "@nestjs/core": "~6.6.7",
     "@nestjs/platform-express": "~6.6.7",
