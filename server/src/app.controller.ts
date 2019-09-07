@@ -5,38 +5,24 @@ import {
   waitForFontsToLoad,
   waitForImagesToLoad,
 } from "@html-pdf-press/puppeteer-util";
+import { HeaderFooterOptions, PrintRequest, PrintPreset } from "@html-pdf-press/types";
 import { Controller, Get, HttpException, HttpStatus, Query, Res } from "@nestjs/common";
 import { Response } from "express";
-import { PDFOptions, Page } from "puppeteer";
-import { assertTypeFn } from "typesmith";
+import { Page, PDFOptions } from "puppeteer";
 import { appConfig } from "./app-config";
 import { AppService } from "./app.service";
+import { printRequestValidator } from "./validators";
 
-export interface HeaderFooterOptions {
-  html?: string | null;
-  selector?: string | null;
-}
-
-export interface PrintOptions {
-  url?: string | null;
-  html?: string | null;
-  header?: HeaderFooterOptions | null;
-  footer?: HeaderFooterOptions | null;
-  waitForSelector?: string | null;
-}
-
-const validatePrintJobOptions = assertTypeFn<PrintOptions>({
-  coerceTypes: true,
-  removeAdditional: "failing",
-});
+import deepMerge = require("lodash/merge");
 
 @Controller()
 export class AppController {
   constructor(private readonly appService: AppService) {}
 
   @Get()
-  async getPdf(@Res() res: Response, @Query() params: PrintOptions): Promise<void> {
-    const options = validatePrintJobOptions(params).unwrap();
+  async getPdf(@Res() res: Response, @Query() params: PrintRequest): Promise<void> {
+    const paramsValidated = printRequestValidator(params).unwrap();
+    const options = mergePresets(paramsValidated);
 
     if (!params.html && !params.url) {
       throw new HttpException('"url" or "html" must be specified', HttpStatus.BAD_REQUEST);
@@ -72,8 +58,8 @@ export class AppController {
       await waitForFontsToLoad(page);
 
       // Determine Header/Footer Html
-      const headerHtml = await determineHeaderFooterHtml(page, "header", options.header);
-      const footerHtml = await determineHeaderFooterHtml(page, "footer", options.footer);
+      const headerHtml = await determineHeaderFooterHtml(page, options.header);
+      const footerHtml = await determineHeaderFooterHtml(page, options.footer);
 
       // Determine if we should show the header and footer
       pdfOptions.displayHeaderFooter = !!(headerHtml || footerHtml);
@@ -104,17 +90,32 @@ export class AppController {
   }
 }
 
-async function determineHeaderFooterHtml(
-  page: Page,
-  type: "header" | "footer",
-  headerFooterOptions: HeaderFooterOptions | null | undefined,
-): Promise<string> {
-  const defaults = appConfig.defaults[type];
-  let html: string | null = null;
-  const selector = headerFooterOptions && "selector" in headerFooterOptions ? headerFooterOptions.selector : defaults.selector;
-  if (selector) {
-    html = await tryExtractHtmlAndRemove(page, selector);
+async function determineHeaderFooterHtml(page: Page, headerFooterOptions: HeaderFooterOptions | null | undefined): Promise<string | null> {
+  if (!headerFooterOptions) {
+    return null;
   }
-  html = html || (headerFooterOptions && headerFooterOptions.html) || defaults.html || "";
-  return html;
+  let html: string | null | undefined = null;
+  if (headerFooterOptions.selector) {
+    html = await tryExtractHtmlAndRemove(page, headerFooterOptions.selector);
+  } else {
+    html = headerFooterOptions.html;
+  }
+  return html == null ? null : html;
+}
+
+function mergePresets(printRequest: PrintRequest): PrintRequest {
+  const presets: PrintRequest[] = [
+    ...getPresets(appConfig.presetBase),
+    ...getPresets((printRequest.preset || "").split(",")),
+    printRequest,
+    ...getPresets(appConfig.presetFinal),
+  ];
+  const result = deepMerge({}, ...presets);
+  return result;
+}
+
+function getPresets(names: Array<string | null>): PrintPreset[] {
+  const appPresets = appConfig.presets;
+  const presets = names.map(n => (n ? appPresets[n] : null)).filter(p => p) as PrintPreset[];
+  return presets;
 }

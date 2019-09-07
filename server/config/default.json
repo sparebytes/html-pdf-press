@@ -11,12 +11,17 @@
         "noSandbox": false,
         "disableGpu": true
     },
-    "defaults": {
-        "header": {
-            "selector": "hpp-print-header"
-        },
-        "footer": {
-            "footerSelector": "hpp-print-footer"
+    "presetDefault": null,
+    "presetBase": "base",
+    "presetFinal": null,
+    "presets": {
+        "base": {
+            "header": {
+                "selector": "hpp-print-header"
+            },
+            "footer": {
+                "selector": "hpp-print-footer"
+            }
         }
     }
 }

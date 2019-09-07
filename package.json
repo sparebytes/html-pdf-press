@@ -10,7 +10,8 @@
   "private": true,
   "workspaces": [
     "puppeteer-util",
-    "server"
+    "server",
+    "types"
   ],
   "scripts": {
     "build": "yarn run server build",

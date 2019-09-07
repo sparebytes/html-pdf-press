@@ -1,5 +1,7 @@
-import * as os from "os";
+import { PrintPresetMap } from "@html-pdf-press/types";
 import * as config from "config";
+import * as os from "os";
+import { printPresetValidatorExact } from "./validators";
 
 export const appConfig = {
   port: configGetInt("port"),
@@ -14,17 +16,24 @@ export const appConfig = {
     disableGpu: configGetBoolean("chrome.disableGpu"),
     initialilzeOnFirstRequest: configGetBoolean("chrome.initialilzeOnFirstRequest", false),
   },
-  defaults: {
-    header: {
-      html: configGetString("defaults.header.html", null),
-      selector: configGetString("defaults.header.selector", null),
-    },
-    footer: {
-      html: configGetString("defaults.footer.html", null),
-      selector: configGetString("defaults.footer.selector", null),
-    },
-  },
+  presetDefault: configGetString("presetDefault", "")
+    .split(",")
+    .filter(s => s),
+  presetBase: configGetString("presetBase", "")
+    .split(",")
+    .filter(s => s),
+  presetFinal: configGetString("presetFinal", "")
+    .split(",")
+    .filter(s => s),
+  presets: configGetJson<PrintPresetMap>("presets"),
 };
+
+const presets = appConfig.presets;
+for (const k in presets) {
+  if (presets.hasOwnProperty(k)) {
+    printPresetValidatorExact(presets[k]).unwrap();
+  }
+}
 
 function configGetString<T>(key: string): string;
 function configGetString<T>(key: string, defaultValue: T): string | T;

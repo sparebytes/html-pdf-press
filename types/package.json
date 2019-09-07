@@ -1,0 +1,12 @@
+{
+  "name": "@html-pdf-press/types",
+  "version": "0.2.0",
+  "description": "",
+  "author": "Franklin Davenport",
+  "license": "MIT",
+  "main": "./index.js",
+  "types": "./index.d.ts",
+  "peerDependencies": {
+    "puppeteer": "^1.19.0"
+  }
+}

@@ -12,14 +12,8 @@
         "disableGpu": "HPP_CHROME_DISABLE_GPU",
         "initialilzeOnFirstRequest": "HPP_CHROME_INITIALIZE_ON_FIRST_REQUEST"
     },
-    "default": {
-        "header": {
-            "headerHtml": "HPP_DEFAULT_HEADER_HTML",
-            "selector": "HPP_DEFAULT_HEADER_SELECTOR"
-        },
-        "footer": {
-            "footerHtml": "HPP_DEFAULT_FOOTER_HTML",
-            "footerSelector": "HPP_DEFAULT_FOOTER_SELECTOR"
-        }
-    }
+    "presetDefault": "HPP_PRESET_DEFAULT",
+    "presetBase": "HPP_PRESET_FINAL",
+    "presetFinal": "HPP_PRESET_FINAL",
+    "presets": "HPP_PRESETS"
 }
