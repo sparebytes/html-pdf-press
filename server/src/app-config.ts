@@ -10,12 +10,11 @@ export const appConfig = {
     bin: /^win/.test(os.platform()) ? configGetString("chrome.binWindows") : configGetString("chrome.bin"),
     useChromium: configGetBoolean("chrome.useChromium"),
     useIncognito: configGetBoolean("chrome.useIncognito"),
-    closePages: configGetBoolean("chrome.closePages"),
     concurrentPages: configGetInt("chrome.concurrentPages"),
     headless: configGetBoolean("chrome.headless"),
     noSandbox: configGetBoolean("chrome.noSandbox"),
     disableGpu: configGetBoolean("chrome.disableGpu"),
-    initialilzeOnFirstRequest: configGetBoolean("chrome.initialilzeOnFirstRequest", false),
+    initializeOnFirstRequest: configGetBoolean("chrome.initializeOnFirstRequest", false),
   },
   presetDefault: configGetString("presetDefault", "")
     .split(",")
@@ -40,8 +39,6 @@ for (const k in presets) {
     printPresetValidatorExact(presets[k]).unwrap();
   }
 }
-
-console.log(appConfig);
 
 function configGetString<T>(key: string): string;
 function configGetString<T>(key: string, defaultValue: T): string | T;

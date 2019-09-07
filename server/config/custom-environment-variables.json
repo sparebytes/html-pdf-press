@@ -5,12 +5,11 @@
         "binWindows": "HPP_CHROME_BIN_WINDOWS",
         "useChromium": "HPP_CHROME_USE_CHROMIUM",
         "useIncognito": "HPP_CHROME_USE_INCOGNITO",
-        "closePages": "HPP_CHROME_CLOSE_PAGES",
         "concurrentPages": "HPP_CHROME_CONCURRENT_PAGES",
         "headless": "HPP_CHROME_HEADLESS",
         "noSandbox": "HPP_CHROME_NO_SANDBOX",
         "disableGpu": "HPP_CHROME_DISABLE_GPU",
-        "initialilzeOnFirstRequest": "HPP_CHROME_INITIALIZE_ON_FIRST_REQUEST"
+        "initializeOnFirstRequest": "HPP_CHROME_INITIALIZE_ON_FIRST_REQUEST"
     },
     "presetDefault": "HPP_PRESET_DEFAULT",
     "presetBase": "HPP_PRESET_FINAL",

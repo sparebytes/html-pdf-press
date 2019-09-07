@@ -3,7 +3,6 @@ import { Browser, BrowserContext, Page } from "puppeteer";
 export interface PrintServiceOptions {
   browser: Browser;
   useIncognito: boolean;
-  closePages: boolean;
   concurrentPages: number;
 }
 
@@ -16,12 +15,10 @@ export class PrintService {
   private readonly availablePageHandles: PageHandle[] = [];
   readonly browser: Browser;
   readonly useIncognito: boolean;
-  readonly closePages: boolean;
   readonly concurrentPages: number;
   constructor(options: PrintServiceOptions) {
     this.browser = options.browser;
     this.useIncognito = options.useIncognito;
-    this.closePages = options.closePages;
     this.concurrentPages = options.concurrentPages;
 
     if (this.concurrentPages > 0) {
@@ -81,12 +78,8 @@ export class PrintService {
         browserContext.close();
         void this.readyNextPageHandle();
       } else {
-        if (this.closePages) {
-          page.close();
-          void this.readyNextPageHandle();
-        } else {
-          this.pushNextPageHandle(pageHandle);
-        }
+        page.close();
+        void this.readyNextPageHandle();
       }
     }
   }

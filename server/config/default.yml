@@ -1,0 +1,47 @@
+# Web Server Port
+port: 7355
+
+# Chrome settings
+chrome:
+  # Path to Chrome binaries on Linux (useChromium must be false)
+  bin: "/usr/bin/google-chrome"
+
+  # Path to Chrome binaries on Windows (useChromium must be false)
+  binWindows: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
+  
+  # If useChromium is true, then the locally install chromium from puppeteer will be used
+  # If useChromium is false, then the bin or binWindows will be used
+  useChromium: true
+
+  # Uses Chrome in incognito mode for each request. This prevents cookies from being cached
+  useIncognito: true
+
+  # The number of simultanious requests that can handled at once
+  concurrentPages: 8
+
+  # Will open chrome windows. Usefull for debuggin but will not allow PDFs to be generated
+  headless: true
+
+  # Disables the security sandbox
+  noSandbox: false
+
+  # Disables GPU
+  disableGpu: true
+
+# The default preset that will be used if none is given
+presetDefault: null
+
+# The base preset that all requests will use. The request and final presets will be merged over this one.
+presetBase: "base"
+
+# The final preset that all requests will use. Used to override settings in previous presets.
+presetFinal: null
+
+# Presets may be used
+presets:
+  base:
+    header:
+      selector: "hpp-print-header"
+    footer:
+      selector: "hpp-print-footer"
+    margins: ".5in"

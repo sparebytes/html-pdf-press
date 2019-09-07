@@ -11,7 +11,7 @@ export class AppService {
   private printServicePromise?: Promise<PrintService>;
 
   constructor() {
-    if (!appConfig.chrome.initialilzeOnFirstRequest) {
+    if (!appConfig.chrome.initializeOnFirstRequest) {
       void this.getPrintService();
     }
   }
@@ -61,7 +61,6 @@ export class AppService {
           new PrintService({
             browser,
             useIncognito: appConfig.chrome.useIncognito,
-            closePages: appConfig.chrome.closePages,
             concurrentPages: appConfig.chrome.concurrentPages,
           }),
       );

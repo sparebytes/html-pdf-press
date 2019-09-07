@@ -108,7 +108,6 @@ export class AppController {
 
       // Blur the activeElement to prevent cursor in text box
       await blurActiveElement(page);
-      console.log(pdfOptions);
       return page.pdf(pdfOptions);
     });
 

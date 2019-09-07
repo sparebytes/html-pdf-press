@@ -12,7 +12,7 @@
     "htmlpdfpress": "./cli.js"
   },
   "scripts": {
-    "build": "rimraf dist && ttsc -p tsconfig.build.json && cpx ../README.md dist && package-json-reducer -s \"scripts devDependencies jest\" -o dist/package.json package.json && cpx {config/default.json,config/custom-environment-variables.json} dist",
+    "build": "rimraf dist && ttsc -p tsconfig.build.json && cpx ../README.md dist && package-json-reducer -s \"scripts devDependencies jest\" -o dist/package.json package.json && cpx {config/default.yml,config/custom-environment-variables.json} dist",
     "start": "ts-node --compiler ttypescript -r tsconfig-paths/register src/main.ts",
     "start:dev": "tsc-watch --compiler ttypescript/bin/tsc -p tsconfig.build.json --onSuccess \"node dist/main.js\"",
     "start:debug": "tsc-watch --compiler ttypescript/bin/tsc -p tsconfig.build.json --onSuccess \"node --inspect=127.0.0.1:7354 dist/main.js\"",
@@ -33,6 +33,7 @@
     "@nestjs/platform-express": "~6.6.7",
     "@types/lodash": "^4.14.138",
     "config": "~3.2.2",
+    "js-yaml": "^3.13.1",
     "lodash": "^4.17.15",
     "puppeteer": "~1.19.0",
     "reflect-metadata": "~0.1.12",
