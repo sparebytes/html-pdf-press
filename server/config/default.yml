@@ -8,7 +8,7 @@ chrome:
 
   # Path to Chrome binaries on Windows (useChromium must be false)
   binWindows: "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe"
-  
+
   # If useChromium is true, then the locally install chromium from puppeteer will be used
   # If useChromium is false, then the bin or binWindows will be used
   useChromium: true
@@ -28,20 +28,21 @@ chrome:
   # Disables GPU
   disableGpu: true
 
-# The default preset that will be used if none is given
+# Comma separated list of presets that will be used by default if none is given in the request
 presetDefault: null
 
-# The base preset that all requests will use. The request and final presets will be merged over this one.
+# Comma separated list of presets that every request will use. The presetDefault or preset provided in the request will override settings in the base preset.
 presetBase: "base"
 
-# The final preset that all requests will use. Used to override settings in previous presets.
+# Comma separated list of presets that every request will use. Settings in the final preset will override the preset given in the request.
 presetFinal: null
 
 # Presets may be used
 presets:
   base:
+    margins: ".5in"
+  extractHeaders:
     header:
       selector: "hpp-print-header"
     footer:
       selector: "hpp-print-footer"
-    margins: ".5in"

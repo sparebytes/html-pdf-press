@@ -17,10 +17,10 @@
   - [ ] Automatically determines size of header/footer
   - [ ] Automatically applies margin to header/footer
   - [ ] Different header for first page
-- [ ] Configurable
-  - [ ] By environment variables
-  - [ ] By json files
-  - [ ] By HTTP query string or json body
+- [x] Configurable
+  - [x] By environment variables
+  - [x] By json files
+  - [x] By HTTP query string or json body
   - [x] Page size and margin presets
   - [x] Load a url or supply HTML directly
   - [x] Use Chrome or Chromium
