@@ -21,7 +21,8 @@
             },
             "footer": {
                 "selector": "hpp-print-footer"
-            }
+            },
+            "margins": ".5in"
         }
     }
 }

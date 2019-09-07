@@ -5,12 +5,13 @@ import {
   waitForFontsToLoad,
   waitForImagesToLoad,
 } from "@html-pdf-press/puppeteer-util";
-import { HeaderFooterOptions, PrintRequest, PrintPreset } from "@html-pdf-press/types";
+import { HeaderFooterOptions, PrintPreset, PrintRequest } from "@html-pdf-press/types";
 import { Controller, Get, HttpException, HttpStatus, Query, Res } from "@nestjs/common";
 import { Response } from "express";
 import { Page, PDFOptions } from "puppeteer";
 import { appConfig } from "./app-config";
 import { AppService } from "./app.service";
+import { normalizeMargins } from "./margin";
 import { printRequestValidator } from "./validators";
 
 import deepMerge = require("lodash/merge");
@@ -21,6 +22,7 @@ export class AppController {
 
   @Get()
   async getPdf(@Res() res: Response, @Query() params: PrintRequest): Promise<void> {
+    params.margins = normalizeMargins(params.margins);
     const paramsValidated = printRequestValidator(params).unwrap();
     const options = mergePresets(paramsValidated);
 
@@ -64,6 +66,8 @@ export class AppController {
       // Determine if we should show the header and footer
       pdfOptions.displayHeaderFooter = !!(headerHtml || footerHtml);
 
+      pdfOptions.margin = options.margins as typeof pdfOptions.margin;
+
       // Apply Header and Footer Html
       if (pdfOptions.displayHeaderFooter) {
         // Extract style tags into header and footer
@@ -79,8 +83,8 @@ export class AppController {
 
       // Blur the activeElement to prevent cursor in text box
       await blurActiveElement(page);
-
-      return page.pdf();
+      console.log(pdfOptions);
+      return page.pdf(pdfOptions);
     });
 
     res.status(200);

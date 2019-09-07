@@ -2,6 +2,7 @@ import { PrintPresetMap } from "@html-pdf-press/types";
 import * as config from "config";
 import * as os from "os";
 import { printPresetValidatorExact } from "./validators";
+import { normalizeMargins } from "./margin";
 
 export const appConfig = {
   port: configGetInt("port"),
@@ -25,15 +26,22 @@ export const appConfig = {
   presetFinal: configGetString("presetFinal", "")
     .split(",")
     .filter(s => s),
-  presets: configGetJson<PrintPresetMap>("presets"),
+  presets: { ...configGetJson<PrintPresetMap>("presets") },
 };
 
 const presets = appConfig.presets;
 for (const k in presets) {
   if (presets.hasOwnProperty(k)) {
+    // Clone the preset to allow modification
+    const preset = (appConfig.presets[k] = { ...presets[k] });
+    if ("margins" in preset) {
+      preset.margins = normalizeMargins(preset.margins);
+    }
     printPresetValidatorExact(presets[k]).unwrap();
   }
 }
+
+console.log(appConfig);
 
 function configGetString<T>(key: string): string;
 function configGetString<T>(key: string, defaultValue: T): string | T;
