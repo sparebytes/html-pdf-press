@@ -1,8 +1,22 @@
+export type PageSize = "Letter" | "Legal" | "Tabloid" | "Ledger" | "A0" | "A1" | "A2" | "A3" | "A4" | "A5" | "A6";
+
 export interface PrintPreset {
   header?: HeaderFooterOptions | null;
   footer?: HeaderFooterOptions | null;
   waitForSelector?: string | null;
   margins?: MarginsNormalized | null;
+  /**
+   * @minimum 0.1
+   * @maximum 2
+   */
+  scale?: number;
+  printBackground?: boolean;
+  landscape?: boolean;
+  pageRanges?: string;
+  format?: PageSize;
+  width?: string | null;
+  height?: string | null;
+  preferCSSPageSize?: boolean;
 }
 
 export interface PrintPresetMap {

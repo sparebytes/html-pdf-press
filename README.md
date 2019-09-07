@@ -21,7 +21,7 @@
   - [ ] By environment variables
   - [ ] By json files
   - [ ] By HTTP query string or json body
-  - [ ] Page size and margin presets
+  - [x] Page size and margin presets
   - [x] Load a url or supply HTML directly
   - [x] Use Chrome or Chromium
 

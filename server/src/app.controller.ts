@@ -26,6 +26,34 @@ export class AppController {
     const paramsValidated = printRequestValidator(params).unwrap();
     const options = mergePresets(paramsValidated);
 
+    const pdfOptions: PDFOptions = {};
+
+    pdfOptions.margin = options.margins as typeof pdfOptions.margin;
+    if (options.scale != null) {
+      pdfOptions.scale = options.scale;
+    }
+    if (options.printBackground != null) {
+      pdfOptions.printBackground = options.printBackground;
+    }
+    if (options.landscape != null) {
+      pdfOptions.landscape = options.landscape;
+    }
+    if (options.pageRanges != null) {
+      pdfOptions.pageRanges = options.pageRanges;
+    }
+    if (options.format != null) {
+      pdfOptions.format = options.format;
+    }
+    if (options.width != null) {
+      pdfOptions.width = options.width;
+    }
+    if (options.height != null) {
+      pdfOptions.height = options.height;
+    }
+    if (options.preferCSSPageSize != null) {
+      pdfOptions.preferCSSPageSize = options.preferCSSPageSize;
+    }
+
     if (!params.html && !params.url) {
       throw new HttpException('"url" or "html" must be specified', HttpStatus.BAD_REQUEST);
     }
@@ -33,7 +61,6 @@ export class AppController {
     const printService = await this.appService.getPrintService();
     const pdfBuffer = await printService.usePage(async page => {
       // Initialize PDF Output Options
-      const pdfOptions: PDFOptions = {};
 
       // Goto the URL
       if (options.url) {
@@ -65,8 +92,6 @@ export class AppController {
 
       // Determine if we should show the header and footer
       pdfOptions.displayHeaderFooter = !!(headerHtml || footerHtml);
-
-      pdfOptions.margin = options.margins as typeof pdfOptions.margin;
 
       // Apply Header and Footer Html
       if (pdfOptions.displayHeaderFooter) {
