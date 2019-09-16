@@ -41,8 +41,50 @@ presetFinal: null
 presets:
   base:
     margins: ".5in"
-  extractHeaders:
     header:
-      selector: "hpp-print-header"
+      selector: ".hpp-print-header"
+      scalingFudge: 0.75
     footer:
-      selector: "hpp-print-footer"
+      selector: ".hpp-print-footer"
+      scalingFudge: 0.75
+
+formats:
+  Letter: ["8.5in", "11in"]
+  Legal: ["8.5in", "14in"]
+  Tabloid: ["11in", "17in"]
+  Ledger: ["17in", "11in"]
+  A0: ["33.1in", "46.8in"]
+  A1: ["23.4in", "33.1in"]
+  A2: ["16.54in", "23.4in"]
+  A3: ["11.7in", "16.54in"]
+  A4: ["8.27in", "11.7in"]
+  A5: ["5.83in", "8.27in"]
+  A6: ["4.13in", "5.83in"]
+
+headerFooterCssResetHtml: |-
+  <style type="text/css">
+    html {
+        font-size: 16px;
+        font-family: "Times New Roman";
+    }
+
+    /* remove margin and padding from body */
+    html > body {
+        margin: 0;
+        padding: 0;
+    }
+    html > body > *:nth-child(1),
+
+    /* remove margin and padding from container of header / footer container */
+    html > body > *:nth-child(3) {
+      margin: 0 !important;
+      padding: 0 !important;
+    }
+
+    /* set width of header / footer container */
+    html > body > *:nth-child(1) > *,
+    html > body > *:nth-child(3) > * {
+      width: 100%;
+      position: relative;
+    }
+  </style>

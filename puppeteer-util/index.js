@@ -1,12 +1,62 @@
-module.exports.tryExtractHtmlAndRemove = async (page, selector) => {
+module.exports.tryMeasureAndExtractHtmlAndRemove = async (page, selector, withOverflow, includeMargins) => {
+  if (includeMargins == null) {
+    withOverflow = true;
+  }
+  if (includeMargins == null) {
+    includeMargins = true;
+  }
   let result = null;
   if (selector) {
     try {
-      result = await page.$eval(selector, el => {
-        const html = el.outerHTML;
-        el.remove();
-        return html;
-      });
+      result = await page.$eval(
+        selector,
+        (el, withOverflow, includeMargins) => {
+          const html = el.outerHTML;
+          const pagePlaceholders = Array.of(el.querySelector(".pageNumber,.totalPages"));
+          for (const pagePlaceholder of pagePlaceholders) {
+            if (pagePlaceholder != null) {
+              pagePlaceholder.innerText = "999";
+            }
+          }
+          if (withOverflow) {
+            el.style.overflow = "hidden";
+          }
+          // [ ] TODO: Make sure margins are correctly parsed. EG 15px vs something else
+          const margins = 0 // !includeMargins ? 0 : (parseInt(elStyle["margin-top"]) || 0) + (parseInt(elStyle["margin-bottom"]) || 0);
+          const elStyle = getComputedStyle(el);
+          const height = el.getBoundingClientRect().height + margins;
+
+          for (const pagePlaceholder of pagePlaceholders) {
+            if (pagePlaceholder != null) {
+              pagePlaceholder.innerText = "";
+            }
+          }
+          el.remove();
+          return { html, height };
+        },
+        withOverflow,
+        includeMargins,
+      );
+    } catch (e) {
+      console.log(e);
+      // Do Nothing
+    }
+  }
+  return result;
+};
+
+module.exports.measureHeight = async (page, html) => {
+  let result = null;
+  if (html) {
+    try {
+      result = await page.evaluate(html => {
+        var wrapper = document.createElement("div");
+        wrapper.innerHTML = html;
+        document.body.appendChild(wrapper);
+        const height = wrapper.offsetHeight;
+        document.body.removeChild(wrapper);
+        return height;
+      }, html);
     } catch (e) {
       // Do Nothing
     }

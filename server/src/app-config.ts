@@ -1,4 +1,4 @@
-import { PrintPresetMap } from "@html-pdf-press/types";
+import { PrintPresetMap, PageFormats } from "@html-pdf-press/types";
 import * as config from "config";
 import * as os from "os";
 import { printPresetValidatorExact } from "./validators";
@@ -26,6 +26,8 @@ export const appConfig = {
     .split(",")
     .filter(s => s),
   presets: { ...configGetJson<PrintPresetMap>("presets") },
+  formats: { ...configGetJson<PageFormats>("formats") },
+  headerFooterCssResetHtml: configGetString("headerFooterCssResetHtml", ""),
 };
 
 const presets = appConfig.presets;
@@ -39,6 +41,8 @@ for (const k in presets) {
     printPresetValidatorExact(presets[k]).unwrap();
   }
 }
+
+// console.dir(appConfig, { depth: null });
 
 function configGetString<T>(key: string): string;
 function configGetString<T>(key: string, defaultValue: T): string | T;

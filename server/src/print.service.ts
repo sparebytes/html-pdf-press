@@ -75,10 +75,10 @@ export class PrintService {
       return result;
     } finally {
       if (browserContext) {
-        browserContext.close();
+        await browserContext.close();
         void this.readyNextPageHandle();
       } else {
-        page.close();
+        await page.close();
         void this.readyNextPageHandle();
       }
     }

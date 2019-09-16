@@ -25,7 +25,10 @@ export interface PrintPresetMap {
 
 export interface HeaderFooterOptions {
   html?: string | null;
+  htmlHeight?: string | null;
   selector?: string | null;
+  scalingFudge?: number | null;
+  wrapperStyle?: string | null;
 }
 
 export interface MarginsNormalized {
@@ -41,4 +44,8 @@ export interface PrintRequest extends PrintPreset {
   url?: string | null;
   html?: string | null;
   preset?: string | null;
+}
+
+export interface PageFormats {
+  [k: string]: [string, string] | null | undefined;
 }
