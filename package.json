@@ -23,7 +23,7 @@
     "standard-version": "lerna version --conventional-commits"
   },
   "devDependencies": {
-    "lerna": "^3.16.4",
-    "prettier": "~1.18.2"
+    "lerna": "^4.0.0",
+    "prettier": "~2.3.1"
   }
 }

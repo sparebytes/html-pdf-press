@@ -5,6 +5,8 @@ import { PrintService } from "./print.service";
 
 import Browser = puppeteer.Browser;
 
+type AllLaunchOptions = puppeteer.LaunchOptions & puppeteer.BrowserLaunchArgumentOptions & puppeteer.BrowserConnectOptions;
+
 @Injectable()
 export class AppService {
   private browserPromise?: Promise<Browser>;
@@ -27,7 +29,7 @@ export class AppService {
       args.push("--disable-gpu");
     }
 
-    const options: puppeteer.LaunchOptions = {
+    const options: AllLaunchOptions = {
       args,
       headless: chrome.headless,
     };

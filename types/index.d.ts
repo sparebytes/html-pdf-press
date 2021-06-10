@@ -1,4 +1,6 @@
-export type PageSize = "Letter" | "Legal" | "Tabloid" | "Ledger" | "A0" | "A1" | "A2" | "A3" | "A4" | "A5" | "A6";
+export type PageSize = 'letter' | 'legal' | 'tabloid' | 'ledger' | 'a0' | 'a1' | 'a2' | 'a3' | 'a4' | 'a5' | 'a6';
+
+                       
 
 export interface PrintPreset {
   header?: HeaderFooterOptions | null;
@@ -13,7 +15,7 @@ export interface PrintPreset {
   printBackground?: boolean;
   landscape?: boolean;
   pageRanges?: string;
-  format?: PageSize;
+  format?: PageSize | null;
   width?: string | null;
   height?: string | null;
   preferCSSPageSize?: boolean;

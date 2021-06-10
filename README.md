@@ -1,6 +1,6 @@
 # HTML PDF Press: Comprehensive HTML => PDF
 
-<img align="right" alt="Typesmith logo" width="160" src="./docs/logo/html-pdf-press-logo-512.png" />
+<img align="right" alt="html-pdf-press logo" width="160" src="./docs/logo/html-pdf-press-logo-512.png" />
 
 ## ✨ Features
 

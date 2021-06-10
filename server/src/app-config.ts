@@ -1,7 +1,6 @@
 import { PrintPresetMap, PageFormats } from "@html-pdf-press/types";
 import * as config from "config";
 import * as os from "os";
-import { printPresetValidatorExact } from "./validators";
 import { normalizeMargins } from "./margin";
 
 export const appConfig = {
@@ -38,7 +37,7 @@ for (const k in presets) {
     if ("margins" in preset) {
       preset.margins = normalizeMargins(preset.margins);
     }
-    printPresetValidatorExact(presets[k]).unwrap();
+    // TODO: validatePrintPreset(presets[k]);
   }
 }
 

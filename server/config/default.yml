@@ -14,19 +14,19 @@ chrome:
   useChromium: true
 
   # Uses Chrome in incognito mode for each request. This prevents cookies from being cached
-  useIncognito: true
+  useIncognito: false
 
   # The number of simultanious requests that can handled at once
   concurrentPages: 8
 
-  # Will open chrome windows. Usefull for debuggin but will not allow PDFs to be generated
+  # Does not open a browser window. Set to false for debugging purposes but it will not allow PDFs to be generated
   headless: true
 
   # Disables the security sandbox
   noSandbox: false
 
   # Disables GPU
-  disableGpu: true
+  disableGpu: false
 
 # Comma separated list of presets that will be used by default if none is given in the request
 presetDefault: null
@@ -49,29 +49,29 @@ presets:
       scalingFudge: 0.75
 
 formats:
-  Letter: ["8.5in", "11in"]
-  Legal: ["8.5in", "14in"]
-  Tabloid: ["11in", "17in"]
-  Ledger: ["17in", "11in"]
-  A0: ["33.1in", "46.8in"]
-  A1: ["23.4in", "33.1in"]
-  A2: ["16.54in", "23.4in"]
-  A3: ["11.7in", "16.54in"]
-  A4: ["8.27in", "11.7in"]
-  A5: ["5.83in", "8.27in"]
-  A6: ["4.13in", "5.83in"]
+  letter: ["8.5in", "11in"]
+  legal: ["8.5in", "14in"]
+  tabloid: ["11in", "17in"]
+  ledger: ["17in", "11in"]
+  a0: ["33.1in", "46.8in"]
+  a1: ["23.4in", "33.1in"]
+  a2: ["16.54in", "23.4in"]
+  a3: ["11.7in", "16.54in"]
+  a4: ["8.27in", "11.7in"]
+  a5: ["5.83in", "8.27in"]
+  a6: ["4.13in", "5.83in"]
 
 headerFooterCssResetHtml: |-
   <style type="text/css">
     html {
-        font-size: 16px;
-        font-family: "Times New Roman";
+      font-size: 16px;
+      font-family: "Times New Roman";
     }
 
     /* remove margin and padding from body */
     html > body {
-        margin: 0;
-        padding: 0;
+      margin: 0;
+      padding: 0;
     }
     html > body > *:nth-child(1),
 

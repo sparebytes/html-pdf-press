@@ -13,7 +13,6 @@ import { appConfig } from "./app-config";
 import { AppService } from "./app.service";
 import { normalizeMargins } from "./margin";
 import { measurementToPixels } from "./measurements";
-import { printRequestValidator } from "./validators";
 
 import deepMerge = require("lodash/merge");
 
@@ -24,7 +23,8 @@ export class AppController {
   @Get()
   async getPdf(@Res() res: Response, @Query() params: PrintRequest): Promise<void> {
     params.margins = normalizeMargins(params.margins);
-    const paramsValidated = printRequestValidator(params).unwrap();
+    // TODO: validatePrintRequestParams(params)
+    const paramsValidated = params;
     const options = mergePresets(paramsValidated);
 
     // Initialize PDF Output Options
@@ -43,7 +43,7 @@ export class AppController {
       pdfOptions.pageRanges = options.pageRanges;
     }
     if (options.format != null) {
-      pdfOptions.format = options.format;
+      pdfOptions.format = options.format ?? undefined;
     }
     if (options.width != null) {
       pdfOptions.width = options.width;
@@ -62,10 +62,10 @@ export class AppController {
     const printService = await this.appService.getPrintService();
     const pdfBuffer = await printService.usePage(async page => {
       // Emulate Print
-      await page.emulateMedia("print");
+      await page.emulateMediaType("print");
 
       // Set View Port to match Page Format minus margins
-      const format = appConfig.formats[options.format || "Letter"];
+      const format = appConfig.formats[options.format || "letter"];
       const viewportWidth = Math.floor(
         measurementToPixels(options.width != null ? options.width : format![0])! -
           measurementToPixels(options.margins!.left != null ? options.margins!.left : 0) -
